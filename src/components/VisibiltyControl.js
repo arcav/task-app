@@ -1,9 +1,9 @@
 import React from 'react'
-import { Fade } from 'react-reveal'
+
 
 export const VisibiltyControl = (props) => {
 	return (
-<Fade>
+
 <div className="form-control">
 			<input
 			type="checkbox"
@@ -15,7 +15,6 @@ export const VisibiltyControl = (props) => {
 			</label>
 			
 		</div>
-</Fade>
-		
+
 	)
 }

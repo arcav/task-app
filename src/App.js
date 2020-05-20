@@ -7,16 +7,13 @@ import { TaskBanner } from './components/TaskBanner'
 import { TaskCreator } from './components/TaskCreator'
 import { VisibiltyControl } from './components/VisibiltyControl'
 
-//Importamos Effectos desde la libreria React-Reveal
-import { Fade } from 'react-reveal'
-
 
 
 
 //Funcion principal App que contiene el estado principal y los componentes 
 function App() {
 
-/* Hooks  para definir el estado inicial del usuario mediante useName 
+/* Hooks  para definir el estado inicial del usuario mediante userName 
  usamos el Hook setUserName para actualizar el estado 	 */
 	const [userName, setUserName] = useState('Arcav');
 	
@@ -52,23 +49,21 @@ usamos el Hook setTaskItems para actualizar el estado */
 				{ name: 'Task Three', done: false },
 				{ name: 'Task Four', done: false }  
 			])
-
 			setShowCompleted(true)
 		}
-	}, [])
+	}, []);
 
+//Hook useEffect para el ciclo de vida del componente 
 	useEffect(() => {
 		localStorage.setItem('tasks', JSON.stringify(taskItems));
 		}, [taskItems])
-
-
+//funcion para crear nuevas tareas
 	const createNewTask = taskName => {
 		if (!taskItems.find(t => t.name === taskName)) {
 			setTaskItems([...taskItems, { name: taskName, done: false }])
 		}
 	};
-
-
+//
 	const toggleTask = task =>
 		setTaskItems(
 			taskItems.map(t => (t.name === task.name ? { ...t, done: !t.done } : t))
@@ -81,15 +76,12 @@ usamos el Hook setTaskItems para actualizar el estado */
 				<TaskRow task={task} key={task.name} toogleTask={toggleTask} />
 			));
 
-
 	return (
-	
 			<div>
 				<TaskBanner
 					userName={userName}
 					taskItems={taskItems}
 				/>
-
 				<div className="container ">
 					<TaskCreator newTask={createNewTask} />
 					<table className="table table-striped table-bordered">
@@ -99,46 +91,32 @@ usamos el Hook setTaskItems para actualizar el estado */
 								<th>Done</th>
 							</tr>
 						</thead>
-
 						<tbody>
 							{taskTableRows(false)}
 						</tbody>
-
 					</table>
-					
 					<div className="bg-secunddary-text-white text-center p-2">
 						<VisibiltyControl
 							description="Completed Tasks"
 							isChecked={showCompleted}
 							newTask={checked => setShowCompleted(checked)} />
-					</div>	
-					
+					</div>		
 					{showCompleted && (
-						
 						<table className="table table-striped table-borderd">
-							<thead>
-							
+							<thead>	
 								<tr>
 									<th>Description</th>
 									<th>Done</th>
-								</tr>
-								
+								</tr>		
 							</thead>
 							<tbody>
 								{taskTableRows(true)}
 							</tbody>						
-						</table>
-						
-						
+						</table>	
 					)}
-				
 				</div>
-
 			</div>
-	
-
-
-	)
-}
+	);
+};
 
 export default App

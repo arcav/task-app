@@ -1,8 +1,8 @@
 import React from 'react'
-import { Fade } from 'react-reveal'
+
 
 export const TaskRow = props => (
-<Fade>
+
 <tr key={props.task.name}>
 		<td>{props.task.name}</td>
 		<td>
@@ -13,7 +13,7 @@ export const TaskRow = props => (
 		</td>
 	</tr>
 
-</Fade>
+
 
 	
 
